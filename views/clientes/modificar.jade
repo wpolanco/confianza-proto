@@ -1,0 +1,77 @@
+extends ../default
+
+block content
+  include ../template/nav
+  div(class=['ui','container','grid','stackable'])
+    div(class=['ten','wide','column'])
+      h2(class=['ui','header','blue','dividing'])= 'Modificar Cliente'
+      
+      div(class='form-nuevocliente')
+        form(class=['ui', 'form'] action='http://localhost:3000/editar' method='post')
+          div(class=['ui', 'two','field'])
+            div(class=['ui field'])
+              label(for='cedula')= 'Cédula / RNC'
+              input(type='text' name='cedula' placeholder='Cedula / RNC' value=cliente[0].cedula)
+            div(class=['ui field'])
+              label(for='descripcion')= 'Descripcion del Cliente'
+              input(type='text' name='descripcion' placeholder='Descripcion' value=cliente[0].descripcion)
+          div(class=['ui','four','fields'])
+            div(class=['ui','field'])
+              label(for='calle')= 'Calle'
+              input(type='text' name='calle' placeholder='Calle' value=cliente[0].calle)
+            div(class=['ui','field'])
+              label(for='numero')= 'Numero'
+              input(type='number' name='numero' placeholder='Numero' value=cliente[0].numero)
+            div(class=['ui','field'])
+              label(for='sector')= 'Sector'
+              input(type='text' name='sector' placeholder='Sector' value=cliente[0].sector)
+              input(type='hidden' name='id_cliente' value=cliente[0].id_cliente)
+            div(class=['ui field'])
+              label(for='provincia')= 'Provincia'
+              //input(type='text' name='provincia' placeholder='Provincia' value=cliente[0].provincia)
+              select(class=['ui search dropdown'] name='provincia')
+                option(value=cliente[0].provincia)= 'Actual: '+cliente[0].provincia
+                option(value='Azua')= 'Azua'
+                option(value='Bahoruco')= 'Bahoruco' 
+                option(value='Barahona')= 'Barahona'
+                option(value='Dajabón')= 'Dajabón'
+                option(value='Distrito Nacional')= 'Distrito Nacional'
+                option(value='Duarte')= 'Duarte'
+                option(value='Elías Piña')= 'Elías Piña'
+                option(value='El Seibo')= 'El Seibo'
+                option(value='Espaillat')= 'Espaillat'
+                option(value='Hato Mayor')= 'Hato Mayor'
+                option(value='Hermanas Mirabal')= 'Hermanas Mirabal'
+                option(value='Independencia')= 'Independencia'
+                option(value='La Altagracia')= 'La Altagracia'
+                option(value='La Romana')= 'La Romana'
+                option(value='La Vega')= 'La Vega'
+                option(value='Maria Trinidad Sánchez')= 'Maria Trinidad Sánchez'
+                option(value='Monseñor Nouel')= 'Monseñor Nouel'
+                option(value='Monte Cristi')= 'Monte Cristi'
+                option(value='Monte Plata')= 'Monte Plata'
+                option(value='Pedernales')= 'Pedernales'
+                option(value='Peravia')= 'Peravia'
+                option(value='Puerto Plata')= 'Puerto Plata'
+                option(value='Samaná')= 'Samaná'
+                option(value='San Cristobal')= 'San Cristobal'
+                option(value='San José de Ocoa')= 'San José de Ocoa'
+                option(value='San Juan')= 'San Juan'
+                option(value='San Pedro de Macorís')= 'San Pedro de Macorís'
+                option(value='San Cristobal')= 'San Cristobal'
+                option(value='Santiago')= 'Santiago'
+                option(value='Santiago Rodríguez')= 'Santiago Rodríguez'
+                option(value='Santo Domingo')= 'Santo Domingo'
+                option(value='Valverde')= 'Valverde'
+          div(class=['ui two fields'])
+            div(class=['ui field'])
+              label(for='latitud')= 'Latitud'
+              input(type='text' name='latitud' placeholder='Latitud' value=cliente[0].latitud)
+            div(class=['ui field'])
+              label(for='longitud')= 'Longitud'
+              input(type='text' name='longitud' placeholder='Longitud' value=cliente[0].longitud)
+          button(class=['ui','button','basic','black'])= 'Modificar Cliente'
+          div(class=['ui','message','error'])
+      
+
+    script(src='/javascripts/validacion.js')

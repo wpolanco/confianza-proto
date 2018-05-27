@@ -1,0 +1,51 @@
+extends ../default
+
+block content
+  include ../template/nav
+  div(class=['ui','container','grid','stackable'])
+    div(class=['sixteen','wide','column'])
+      br
+      br
+      div(class=['ui','container','grid','stackable'])
+      form(class=['ui', 'form'] action='http://localhost:3000/buscarcliente' method='post')
+
+        h2(class=['ui','header','blue','dividing'])= 'Lista de Clientes'
+        
+        table(class=['ui','table','celled'] id='tbl-clientes')
+          thead
+            tr
+              th= 'ID'
+              th= 'CEDULA / RNC'
+              th= 'Descripcion'
+              th= 'Calle'
+              th= 'Numero'
+              th= 'Sector'
+              th= 'Provincia'
+              th= 'Latitud'
+              th= 'Longitud'
+              th= 'Fecha de creacion'
+              th= 'Operaciones'
+          tbody
+            each cliente in clientes
+              tr
+                td(id='id_cliente')= cliente.id_cliente
+                td= cliente.cedula
+                td= cliente.descripcion
+                td= cliente.calle
+                td= cliente.numero
+                td= cliente.sector
+                td= cliente.provincia
+                td= cliente.latitud
+                td= cliente.longitud              
+                td= cliente.fecha_creacion
+                td 
+                  a(class=['ui button basic icon'] href='#' data-inverted='' data-tooltip='Eliminar' data-position='top center' id='btn-eliminar')
+                    i(class=['trash icon'])
+                  a(class=['ui button basic icon'] href='http://localhost:3000/modificarcliente/'+cliente.id_cliente data-inverted='' data-tooltip='Modificar' data-position='top center' id='btn-modificar')
+                    i(class=['edit icon'])
+
+  script(src='/javascripts/clientes.js')
+          
+            
+      
+  

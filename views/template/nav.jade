@@ -1,0 +1,16 @@
+div(class=['ui','pointing','menu'])
+  a(class=['item'] href='http://localhost:3000')= 'Inicio'
+  //a(class=['item'] href='http://localhost:3000/nuevo')= 'Nuevo Producto'
+  a(class=['item'] href='http://localhost:3000/clientes')= 'Ver Clientes'
+  a(class=['item'] href='http://localhost:3000/rutas')= 'Ver Rutas'
+  div(class=['right', 'menu'])
+    div(class=['item'])
+      a(href='http://localhost:3000/nuevo')
+        button(class=['ui positive button icon'])
+          i(class='street view icon')
+          span  Nuevo Cliente
+        
+      a(href='http://localhost:3000/nuevaruta')  
+        button(class=['ui primary button'] name='Ruta')
+          i(class='shipping fast icon')
+          span Nueva Ruta

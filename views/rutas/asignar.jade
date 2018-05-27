@@ -1,0 +1,38 @@
+extends ../default
+
+block content
+  include ../template/nav
+  div(class=['ui','container','grid','stackable'])
+    div(class=['fourteen','wide','column'])
+      h2(class=['ui','header','blue','dividing'])= 'Asignar Clientes a Ruta'
+      
+      div(class='form-nuevaruta')
+        form(class=['ui', 'form'] action='http://localhost:3000/editarasignarruta' method='post')
+          div(class=['ui', 'field'])
+            label(for='descripcion')= 'Descripcion de la Ruta'
+            input(type='text' name='descripcion' placeholder='Descripcion' value=ruta[0].descripcion)
+            input(type='hidden' name='id_ruta' id='id_ruta' value=ruta[0].id_ruta)
+            
+          table(class=['ui','table','celled'] id='tbl-clientes')
+              thead
+                tr
+                  th= 'ID'
+                  th= 'CEDULA / RNC'
+                  th= 'Descripcion'
+                  th= 'Sector'
+                  th= 'Operaciones'
+              tbody
+                each cliente in clientes
+                  tr
+                    td(id='id_cliente')= cliente.id_cliente
+                    td= cliente.cedula
+                    td= cliente.descripcion
+                    td= cliente.sector
+                    td 
+                      a(class=['ui button basic icon'] href='#' data-inverted='' data-tooltip='Asignar' data-position='top center' id='btn-asignar')
+                        i(class=['check square icon'])
+
+          div(class=['ui','message','error'])
+      
+
+    script(src='/javascripts/asignar.js')

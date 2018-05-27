@@ -1,0 +1,72 @@
+extends ../default
+block content
+  include ../template/nav
+  div(class=['ui','container','grid','stackable'])
+
+    div(class=['nine','wide','column'])
+      h2(class=['ui','header','blue','dividing'])= 'Ver Clientes por Ruta'
+      
+      div(class='form-nuevaruta')
+        form(class=['ui', 'form'])
+          div(class=['ui', 'field'])
+            label(for='descripcion')= 'Descripcion de la Ruta'
+            input(type='text' name='descripcion' placeholder='Descripcion' value=ruta[0].descripcion)
+            input(type='hidden' name='id_ruta' id='id_ruta' value=ruta[0].id_ruta)
+            
+          table(class=['ui','table','celled'] id='tbl-clientes')
+              thead
+                tr
+                  th= 'ID'
+                  th= 'CEDULA / RNC'
+                  th= 'Descripcion'
+                  th= 'Sector'
+                  th= 'Operaciones'
+              tbody
+                each cliente in clientes
+                  tr
+                    td(id='id_cliente')= cliente.id_cliente
+                    td= cliente.cedula
+                    td= cliente.descripcion
+                    td= cliente.sector
+                    td 
+                      a(class=['ui button basic icon'] href='#' data-inverted='' data-tooltip='Eliminar Cliente' data-position='top center' id='btn-eliminar-asignado')
+                        i(class=['trash icon'])
+
+          div(class=['ui','message','error'])
+    div(class=['seven wide column'])
+      h2(class=['ui header blue dividing'])= 'Mapa de Ruta'
+      div(id='mapa' style='width: 500px; height: 380px;')
+      script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBRKyXFSVA3yvGmZSfa9Fl7POyea6ajiT0')
+      script(type='text/javascript').
+        var clientes = JSON.parse('!{JSON.stringify(clientes)}');
+        //console.log(clientes[0].latitud);
+        var divMapa = document.getElementById('mapa');
+        var gMapa = new google.maps.Map(divMapa, {
+            zoom : 15,
+            center: new google.maps.LatLng(clientes[0].latitud, clientes[0].longitud),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        var gMarker, i;
+        var infoWindow = new google.maps.InfoWindow();
+          
+          for(i=0; i<clientes.length;i++){
+              gMarker = new google.maps.Marker({
+               position: new google.maps.LatLng(clientes[i].latitud, clientes[i].longitud),
+               animation: google.maps.Animation.DROP,
+               map: gMapa,
+               title: clientes[i].descripcion
+             });
+             gMarker.setIcon('https://cdn4.iconfinder.com/data/icons/is_beta_accounting/png/32/money_bag.png');
+              
+             google.maps.event.addListener(gMarker, 'click', (function(gMarker, i){
+               return function(){
+                 infoWindow.setContent ('<strong>Cedula /  RNC: </strong>'+ clientes[i].cedula + '<br>' + '<strong>Descripcion: </strong>' + clientes[i].descripcion + '<br>' + '<strong>Sector: </strong>'+clientes[i].sector);
+                 infoWindow.open(gMapa, gMarker);
+               }
+             })(gMarker, i));
+            }
+
+    
+    script(src='/javascripts/clientes.js')
+    //script(src='/javascripts/mapa.js')
+    

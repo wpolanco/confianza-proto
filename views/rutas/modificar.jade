@@ -1,0 +1,19 @@
+extends ../default
+
+block content
+  include ../template/nav
+  div(class=['ui','container','grid','stackable'])
+    div(class=['ten','wide','column'])
+      h2(class=['ui','header','blue','dividing'])= 'Modificar Ruta'
+      
+      div(class='form-nuevaruta')
+        form(class=['ui', 'form'] action='http://localhost:3000/editarruta' method='post')
+          div(class=['ui', 'field'])
+            label(for='descripcion')= 'Descripcion de la Ruta'
+            input(type='text' name='descripcion' placeholder='Descripcion' value=ruta[0].descripcion)
+            input(type='hidden' name='id_ruta' value=ruta[0].id_ruta)
+          button(class=['ui','button','basic','black'])= 'Modificar Ruta'
+          div(class=['ui','message','error'])
+      
+
+    script(src='/javascripts/validacion.js')

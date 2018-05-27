@@ -1,0 +1,40 @@
+extends ../default
+
+block content
+  include ../template/nav
+  div(class=['ui','container','grid','stackable'])
+    div(class=['sixteen','wide','column'])
+      br
+      br
+      div(class=['ui','container','grid','stackable'])
+      form(class=['ui', 'form'])
+        h2(class=['ui','header','blue','dividing'])= 'Lista de Rutas'
+        
+        table(class=['ui','table','celled'] id='tbl-rutas')
+          thead
+            tr
+              th= 'ID'
+              th= 'Descripcion'
+              th= 'Fecha de Creacion'
+              th= 'Operaciones'
+          tbody
+            each ruta in rutas
+              tr
+                td(id='id_ruta')= ruta.id_ruta
+                td= ruta.descripcion
+                td= ruta.fecha_creacion
+                td 
+                  a(class=['ui button basic icon'] href='#' data-inverted='' data-tooltip='Eliminar' data-position='top center' id='btn-eliminar')
+                    i(class=['trash icon'])
+                  a(class=['ui button basic icon'] href='http://localhost:3000/modificarruta/'+ruta.id_ruta data-inverted='' data-tooltip='Modificar' data-position='top center' id='btn-modificar')
+                    i(class=['edit icon'])
+                  a(class=['ui button basic icon'] href='http://localhost:3000/asignarclienteruta/'+ruta.id_ruta data-inverted='' data-tooltip='Asignar Clientes' data-position='top center' id='btn-asignar')
+                    i(class=['user circle icon'])
+                  a(class=['ui button basic icon'] href='http://localhost:3000/validarclientes/'+ruta.id_ruta data-inverted='' data-tooltip='Visualizar Clientes' data-position='top center' id='btn-validar')
+                    i(class=['eye icon'])
+
+  script(src='/javascripts/rutas.js')
+          
+            
+      
+  
